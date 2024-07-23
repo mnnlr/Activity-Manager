@@ -6,7 +6,7 @@ class SuccessPage:
         self.root = root
         self.tokens = tokens
         self.on_logout = on_logout
-        self.frame = tk.Frame(root, bd=5, relief=tk.GROOVE,fg="black", bg="white")
+        self.frame = tk.Frame(root, bd=5, relief=tk.GROOVE)
         self.frame.pack(pady=50)
 
         self.label_success = tk.Label(self.frame, text="Profile",)

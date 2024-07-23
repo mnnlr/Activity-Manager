@@ -31,3 +31,6 @@ class UserActivityMonitor:
                 self.on_inactivity()
                 self.last_activity_time = current_time  
             time.sleep(1) 
+            
+            
+           

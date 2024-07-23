@@ -31,14 +31,16 @@ class LoginPage:
         try:
             response = requests.post(
                 'http://127.0.0.1:5000/login',
-                json={'username': username, 'password': password}
+                json={'username': username, 'password': password},
+                headers={'Content-Type': 'application/json'}
             )
+            
             response_data = response.json()
 
             if response.status_code == 200 and response_data.get('message') == 'Login Success':
                 messagebox.showinfo("Login", "Login Successful")
 
-                # Store tokens for further use
+              
                 self.tokens['access_token'] = response_data.get('access_token')
                 self.tokens['refresh_token'] = response_data.get('refresh_token')
 
