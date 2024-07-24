@@ -1,4 +1,4 @@
-##Overview
+#Overview
 
 The Activity Monitor program is designed to track user activity on a computer and automatically log out the user after a period of inactivity. It uses several libraries to achieve its functionality:
 
