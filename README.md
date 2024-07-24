@@ -1,4 +1,4 @@
-Overview
+##Overview
 
 The Activity Monitor program is designed to track user activity on a computer and automatically log out the user after a period of inactivity. It uses several libraries to achieve its functionality:
 
@@ -10,7 +10,7 @@ The Activity Monitor program is designed to track user activity on a computer an
 
     tkinter: For the graphical user interface (GUI).
 
-Features
+#Features
 
     Mouse Activity Monitoring: Monitors mouse movements and interactions.
 
@@ -20,7 +20,7 @@ Features
 
     Graphical User Interface: Provides a GUI for user interaction and notifications using tkinter.
 
-Installation
+#Installation
 
 Clone the Repository:
 git clone https://github.com/Deepak3168/Activity-Monitor.git
@@ -32,12 +32,12 @@ Ensure you have Python installed. Install the necessary libraries using the requ
 
     pip install -r requirements.txt
 
-Configuration
+#Configuration
 
 Inactivity Threshold: The default threshold for inactivity is set to 5 minutes (300 seconds). This can be adjusted in the code in needed
-# on action.py  lineno:10
+    ```bash on action.py  lineno:10
 
-    self.inactivity_threshold = 300
+    self.inactivity_threshold = 300 ```
 
     Back end Configuration: Ensure that the back end endpoints are running before using the Activity Monitor program. Configure the back end endpoints in login.py and logout.py to match your server's URL.
 
