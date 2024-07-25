@@ -1,12 +1,21 @@
+asyncgui==0.6.3
+asynckivy==0.6.3
 certifi==2024.7.4
 charset-normalizer==3.3.2
+docutils==0.21.2
 evdev==1.7.1
 idna==3.7
 keyboard==0.13.5
+Kivy==2.3.0
+Kivy-examples==2.3.0
+Kivy-Garden==0.1.5
+kivymd @ https://github.com/kivymd/KivyMD/archive/master.zip#sha256=16aac37c1f54ea0ba6970d478ee9fba286ff916fd0f30186cd96b44e577eb479
+materialyoucolor==2.0.9
 MouseInfo==0.1.3
 pillow==10.4.0
 PyAutoGUI==0.9.54
 PyGetWindow==0.0.9
+Pygments==2.18.0
 PyMsgBox==1.0.9
 pynput==1.7.7
 pyperclip==1.9.0
