@@ -1,2 +1,4 @@
 monitorfrontend/*
 __pycache__/*  
+KivyMonitor/__pycache__/*
+
