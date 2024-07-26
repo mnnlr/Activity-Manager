@@ -5,14 +5,15 @@ The Activity Monitor program is designed to track user activity on a computer an
 - **pynput**: For detecting mouse movements and keyboard actions.
 - **keyboard**: For capturing keyboard events.
 - **pyautogui**: For tracking mouse position and determining inactivity.
-- **tkinter**: For the graphical user interface (GUI).
+- **tkinter**: For the graphical user interface (GUI) in the Tkinter version.
+- **kivy**: For the graphical user interface (GUI) in the Kivy version.
 
 # Features
 
 - **Mouse Activity Monitoring**: Monitors mouse movements and interactions.
 - **Keyboard Activity Monitoring**: Captures keyboard actions.
 - **Automatic Logout**: Logs out the user after a predefined period of inactivity.
-- **Graphical User Interface**: Provides a GUI for user interaction and notifications using tkinter.
+- **Graphical User Interface**: Provides a GUI for user interaction and notifications using either Tkinter or Kivy.
 
 # Installation
 
@@ -43,22 +44,30 @@ The Activity Monitor program is designed to track user activity on a computer an
 
 1. **Run the Program**:
 
-    Navigate to the directory where `monitor.py` is located and execute the following command:
-    ```bash
-    python monitor.py
-    ```
+    Navigate to the directory where the respective monitor script is located and execute the following command:
+
+    - For the **Kivy** version:
+        ```bash
+        python Kivy/monitor.py
+        ```
+
+    - For the **Tkinter** version:
+        ```bash
+        python Tkinter/monitor.py
+        ```
 
 2. **Program Operation**:
-    - The GUI window provided by tkinter will launch, allowing you to interact with the program.
+    - The GUI window provided by Kivy or Tkinter will launch, allowing you to interact with the program.
     - The program will start monitoring user activity.
     - If no mouse or keyboard activity is detected for the set threshold period, the program will automatically log out the user.
 
 # Repository
 
-- **Repository Link**: [Activity Monitor Program Repository](https://github.com/Deepak3168/Activity-Monitor)
+- **Repository Link**: [Activity Monitor Program Repository](https://github.com/mnnlr/Activity-Manager)
 
 # Example Use Case
 
 - **Security**: Automatically logs out users after a period of inactivity to enhance security.
 - **Session Management**: Helps manage idle sessions effectively, freeing up system resources.
-- **User Interaction**: Provides a graphical interface for monitoring and notifications.
+- **User Interaction**: Provides a graphical interface for monitoring and notifications using either Tkinter or Kivy.
+
