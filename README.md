@@ -21,7 +21,7 @@ The Activity Monitor program is designed to track user activity on a computer an
     ```bash
     git clone https://github.com/Deepak3168/Activity-Monitor.git
     cd Activity-Monitor
-    ```
+    ```4
 
 2. **Install the Required Libraries**:
 

@@ -8,8 +8,8 @@ class UserActivityMonitor:
     def __init__(self, on_inactivity):
         self.on_inactivity = on_inactivity
         self.last_activity_time = time.time()
-        self.inactivity_threshold = 10 
-        self.monitoring_active = True  # Flag to control monitoring
+        self.inactivity_threshold = 10
+        self.monitoring_active = True 
 
         self.monitor_thread = threading.Thread(target=self.monitor_activity)
         self.monitor_thread.daemon = True
@@ -34,5 +34,5 @@ class UserActivityMonitor:
             current_time = time.time()
             if current_time - self.last_activity_time > self.inactivity_threshold:
                 Clock.schedule_once(lambda dt: self.on_inactivity())
-                self.stop_monitoring()  # Stop monitoring after inactivity is detected
+                self.stop_monitoring() 
             time.sleep(1)

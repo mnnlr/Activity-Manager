@@ -1,7 +1,12 @@
 <LoginScreen>:
     name: 'login'
-
-    MDCard:
+    canvas.before:
+        Color:
+            rgba: 0/255, 51/255, 102/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
         size_hint: None, None
         size: 400, 300
         pos_hint: {"center_x": 0.5, "center_y": 0.5}
@@ -9,6 +14,13 @@
         padding: 25
         spacing: 25
         orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 173/255, 216/255, 230/255, 1
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+				radius: [dp(20)]
         MDLabel:
             id: welcome_label
             text: "Welcome"
@@ -39,9 +51,10 @@
             font_size: 18
             pos_hint: {"center_x": 0.5}
             password: True
-
-        MDRoundFlatButton:
-            text: "Login"
-            font_size: 18
-            pos_hint: {"center_x": 0.5}
+            
+		MDFillRoundFlatIconButton:
+			style:"filled"
+			text: "Login"
+			font_size: 18
+			pos_hint: {"center_x": 0.5}
             on_press: app.login()
