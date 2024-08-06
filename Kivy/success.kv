@@ -47,7 +47,6 @@
                 pos: self.pos
                 size: self.size
                 radius: [dp(20)]
-
         BoxLayout:
             orientation: 'vertical'
             padding_hint: None
@@ -63,7 +62,7 @@
                 valign: "middle"
                 text: ""
             MDLabel:
-                id: address
+                id: joined
                 valign: "middle"
                 text: ""
             BoxLayout:
@@ -205,13 +204,13 @@
 						on_release: app.display_employeeinfo()
 						pos_hint :{"center_x":.5,"center_y":.5}
 						MDLabel:
-							text:"Active Goals"
+							text:"Employee Info"
 							valign:'middle'
 							halign:'center'
 							padding:dp(10)
 
 						MDLabel:
-							text:"3"
+							text:""
 							valign:'middle'
 							font_style: "H6"
 							halign:'center'
@@ -225,13 +224,13 @@
 						on_release: app.display_table()
 						pos_hint :{"center_x":.5,"center_y":.5}
 						MDLabel:
-							text:"Progress"
+							text:"Attendence"
 							valign:'middle'
 							halign:'center'
 							padding:dp(10)
 
 						MDLabel:
-							text:"40%"
+							text:""
 							valign:'middle'
 							font_style: "H6"
 							halign:'center'
@@ -244,7 +243,7 @@
 						pos_hint :{"center_x":.5,"center_y":.5}
 						on_release: app.display_personalinfo()
 						MDLabel:
-							text:"Completed Task"
+							text:"Personal Info"
 							valign:'middle'
 							halign:'center'
 							

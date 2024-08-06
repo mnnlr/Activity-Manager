@@ -19,7 +19,6 @@ from kivy.uix.scrollview import ScrollView
 from datetime import datetime
 
 
-
 class ProfileCard(MDCard):
     name = StringProperty("")
     email = StringProperty("")
@@ -163,7 +162,7 @@ class MainApp(MDApp):
                     text=key.replace('_', ' ').title() + ':',
                     size_hint_y=None,
                     height=dp(40),
-                    halign='center',
+                    halign='left',
                     valign='middle',
                     font_style='Subtitle1',  
                     color=(0, 0, 0, 1)  
@@ -172,7 +171,7 @@ class MainApp(MDApp):
                     text=value,
                     size_hint_y=None,
                     height=dp(40),
-                    halign='center',
+                    halign='left',
                     valign='middle',
                     font_style='Subtitle1',  
                     color=(0.3, 0.3, 0.3, 1)  
@@ -244,7 +243,7 @@ class MainApp(MDApp):
                     text=key.replace('_', ' ').title() + ':',
                     size_hint_y=None,
                     height=dp(40),
-                    halign='center',
+                    halign='left',
                     valign='middle',
                     font_style='Subtitle1',
                     color=(0, 0, 0, 1)  
@@ -254,7 +253,7 @@ class MainApp(MDApp):
                     text=str(value),
                     size_hint_y=None,
                     height=dp(40),
-                    halign='center',
+                    halign='left',
                     valign='middle',
                     font_style='Subtitle1',  
                     color=(0.3, 0.3, 0.3, 1)  
@@ -262,12 +261,13 @@ class MainApp(MDApp):
 
                 grid_layout.add_widget(label_key)
                 grid_layout.add_widget(label_value)
-
             card.add_widget(scroll_view)
+            empty_widget = Widget(
+                size_hint_y=None,
+                height=dp(50)
+            )
+            grid_layout.add_widget(empty_widget)
             scroll_view.add_widget(grid_layout)
-
-
-            #card.add_widget(empty_widget)
             self.personal_info_card = card
             scroll_container.add_widget(card)
         else:
@@ -279,7 +279,4 @@ class MainApp(MDApp):
 if __name__ == '__main__':
     MainApp().run()
 
-"""            empty_widget = Widget(
-                size_hint_y=None,
-                height=dp(50)
-            )"""
+"""            """

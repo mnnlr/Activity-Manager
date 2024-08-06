@@ -50,5 +50,3 @@ class Profile:
             self.profile_data['employee_data'] = employee_data
         
         return self.profile_data
-
-

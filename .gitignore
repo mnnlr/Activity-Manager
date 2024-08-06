@@ -1,5 +1,7 @@
 monitorfrontend/*
 __pycache__/*  
 Kivy/__pycache__/*
+Kivy/build/*
 Tkinter/__pycache__/*
-
+Kivy/image.png
+Kivy/sam.py 
