@@ -8,7 +8,7 @@ class UserActivityMonitor:
     def __init__(self, on_inactivity):
         self.on_inactivity = on_inactivity
         self.last_activity_time = time.time()
-        self.inactivity_threshold = 10
+        self.inactivity_threshold = 2700
         self.monitoring_active = True 
 
         self.monitor_thread = threading.Thread(target=self.monitor_activity)

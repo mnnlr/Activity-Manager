@@ -1,79 +1,99 @@
-from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
-from kivymd.app import MDApp
 from kivymd.uix.card import MDCard
-from kivymd.uix.button import MDRaisedButton
-from kivymd.uix.label import MDLabel
-from kivymd.uix.toolbar import MDTopAppBar  
+from kivy.properties import StringProperty
+from kivy.lang import Builder
+from kivymd.app import MDApp
 
+class ProfileCard(MDCard):
+    pass
 
-KV = '''
-BoxLayout:
-    orientation: 'vertical'
-    
-    MDTopAppBar:  # Changed from MDToolbar to MDTopAppBar
-        title: "Button to Card Example"
-        elevation: 10
+class EmployeeInfo(MDCard):
+    employeeid = StringProperty("N/A")
+    joined = StringProperty("N/A")
+    designation = StringProperty("N/A")
+    designationlevel = StringProperty("N/A")
+    shift = StringProperty("N/A")
 
-    BoxLayout:
-        size_hint_y: None
-        height: dp(50)
-        padding: dp(10)
-        spacing: dp(10)
-        
-        MDRaisedButton:
-            text: "Card 1"
-            on_release: app.show_card(1)
+    def __init__(self, employeeid="N/A", joined="N/A", designation="N/A", designationlevel="N/A", shift="N/A", **kwargs):
+        super().__init__(**kwargs)
+        self.employeeid = employeeid
+        self.joined = joined 
+        self.designation = designation 
+        self.designationlevel = designationlevel
+        self.shift = shift 
 
-        MDRaisedButton:
-            text: "Card 2"
-            on_release: app.show_card(2)
+class PersonalInfo(MDCard):
+    firstname = StringProperty("N/A")
+    lastname = StringProperty("N/A")
+    fathername = StringProperty("N/A")
+    mothername = StringProperty("N/A")
+    address = StringProperty("N/A")
+    phone = StringProperty("N/A")
+    email = StringProperty("N/A")
+    description = StringProperty("N/A")
 
-        MDRaisedButton:
-            text: "Card 3"
-            on_release: app.show_card(3)
+    def __init__(self, firstname="N/A", lastname="N/A", mothername="N/A", fathername="N/A", address="N/A", email="N/A", phone="N/A", description="N/A", **kwargs):
+        super().__init__(**kwargs)
+        self.firstname = firstname 
+        self.lastname = lastname
+        self.mothername = mothername 
+        self.fathername = fathername 
+        self.address = address 
+        self.phone = phone 
+        self.email = email 
+        self.description = description
 
-        MDRaisedButton:
-            text: "Card 4"
-            on_release: app.show_card(4)
+Builder.load_file('sample.kv')
 
-    BoxLayout:
-        id: card_container
-        orientation: 'vertical'
-        padding: dp(10)
-        spacing: dp(10)
-'''
+class SuccessScreen(BoxLayout):
+    def __init__(self, **kw):
+        super().__init__(**kw)
 
 class MainApp(MDApp):
+    employee_card = None
+    personal_card = None
+
     def build(self):
-        return Builder.load_string(KV)
+        return SuccessScreen()
 
-    def show_card(self, card_number):
-        # Clear previous cards
-        card_container = self.root.ids.card_container
-        card_container.clear_widgets()
+    def display_employeeinfo(self):
+        self.root.ids.widget.text = "Employee Info"
+        container = self.root.ids.scroll_container
+        container.clear_widgets()
         
-        # Create and add the appropriate card based on button click
-        card = MDCard(
-            size_hint=(1, None),
-            height="200dp",
-            padding="10dp",
-            orientation="vertical",
-            md_bg_color=(1, 1, 1, 1)
-        )
-
-        card_content = f"This is content for Card {card_number}"
-        
-        card.add_widget(
-            MDLabel(
-                text=card_content,
-                halign="center",
-                theme_text_color="Secondary",
-                font_style="H6"
+        if not self.employee_card:
+            self.employee_card = EmployeeInfo(
+                employeeid="12345",
+                joined="2020-01-01",
+                designation="Software Engineer",
+                designationlevel="Level 2",
+                shift="Morning",
+                pos_hint={"center_x":.5,"center_y":.5},
+				orientation='vertical'
             )
-        )
+        
+        container.add_widget(self.employee_card)
 
-        card_container.add_widget(card)
+    def display_personalinfo(self):
+        self.root.ids.widget.text = "Personal Info"
+        container = self.root.ids.scroll_container
+        container.clear_widgets()
+        
+        if not self.personal_card:
+            self.personal_card = PersonalInfo(
+                firstname="John",
+                lastname="Doe",
+                mothername="Jane Doe",
+                fathername="James Doe",
+                address="123 Main St",
+                email="john.doe@example.com",
+                phone="+1 234 567 890",
+                description="A dedicated software engineer",
+                pos_hint={"center_x":.5,"center_y":.5},
+				orientation='vertical'
+            )
+        
+        container.add_widget(self.personal_card)
 
-# Run the app
-MainApp().run()
+if __name__ == "__main__":
+    MainApp().run()

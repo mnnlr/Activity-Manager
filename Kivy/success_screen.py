@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import Screen
 from action import UserActivityMonitor
 from logout_action import perform_logout
 
+
 class SuccessScreen(Screen):
     def __init__(self, perform_logout, screen_manager, **kwargs):
         super().__init__(**kwargs)

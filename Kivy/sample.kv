@@ -1,44 +1,21 @@
 <ProfileCard>:
+    id: action
     orientation: 'horizontal'
-    size_hint: None, None
-    size: (dp(883), dp(171))
+    size_hint_y: .26
+    elevation: 2
+    padding: dp(8)
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [dp(20)]  
     BoxLayout:
         orientation: 'vertical'
-        size_hint: None, None
-        size: (dp(300), dp(160))
+        size_hint_x: .2
+        spacing: dp(8)
         padding: dp(10)
-        canvas.before:
-            Color:
-                rgba: 0, 0, 0, 0
-            RoundedRectangle:
-                pos: self.pos
-                size: self.size
-                radius: [dp(50)]
-        AsyncImage:
-            source: 'image.png'
-            size_hint: None, None
-            size: (dp(100), dp(100))
-            pos_hint: {"center_x": .5}
-            canvas.before:
-                Color:
-                    rgba: 0, 0, 0, 0
-                RoundedRectangle:
-                    pos: self.pos
-                    size: self.size
-                    radius: [dp(50)]
-        MDLabel:
-            id: name
-            text: ""
-            size_hint_y: None
-            height: dp(40)
-            halign: 'center'
-            valign: 'middle'
-            pos_hint: {"center_x": .5}
-
-    BoxLayout:
-        size: (dp(576), dp(146))
-        orientation: 'horizontal'
-        padding_hint: None
         canvas.before:
             Color:
                 rgba: 1, 1, 1, 1
@@ -46,377 +23,399 @@
                 pos: self.pos
                 size: self.size
                 radius: [dp(20)]
-
-        BoxLayout:
-            orientation: 'vertical'
-            padding_hint: None
+                
+        AsyncImage:
+            id: avatar
+            source: '' 
             canvas.before:
                 Color:
                     rgba: 1, 1, 1, 1
                 RoundedRectangle:
                     pos: self.pos
                     size: self.size
-                    radius: [dp(20)]
-            MDLabel:
-                id: designation
-                valign: "middle"
-                text: ""
-            MDLabel:
-                id: address
-                valign: "middle"
-                text: ""
-            BoxLayout:
-                orientation: 'horizontal'
-                padding: dp(20)
-                size_hint_y: None
-                height: dp(50)
-                MDIcon:
-                    icon: "phone"
-                    size_hint: None, None
-                    size: dp(24), dp(24)
-                    pos_hint: {"center_y": .5}
-                MDLabel:
-                    id: phone_number
-                    text: ""
-                    halign: "left"
-                    valign: "middle"
-                    size_hint_y: None
-                    height: dp(24)
-                    pos_hint: {"center_y": .5}
-
-            BoxLayout:
-                orientation: 'horizontal'
-                padding: dp(20)
-                size_hint_y: None
-                height: dp(50)
-                MDIcon:
-                    icon: "mail"
-                    size_hint: None, None
-                    size: dp(24), dp(24)
-                    pos_hint: {"center_y": .5}
-                MDLabel:
-                    id: email
-                    text: "manish@mail.com"
-                    halign: "left"
-                    valign: "middle"
-                    size_hint_y: None
-                    height: dp(24)
-                    pos_hint: {"center_y": .5}
-
-        BoxLayout:
-            orientation: 'vertical'
-            padding_hint: None
-            canvas.before:
-                Color:
-                    rgba: 1, 1, 1, 1
-                RoundedRectangle:
-                    pos: self.pos
-                    size: self.size
-                    radius: [dp(20)]
-            MDLabel:
-                id: designation
-                valign: "middle"
-                text: "dlkbmm"
-            MDLabel:
-                id: address
-                valign: "middle"
-                text: "lkcmbmb"
-<EmployeeCard>:
-    size_hint: None, None
-    size: dp(869), dp(330)
-    orientation: 'vertical'
-    padding: dp(10)
-
-    MDLabel:
-        text: "Employee Information"
-        font_style: "H5"
-        halign: 'center'
-
-    MDLabel:
-        text: "Role: " + root.role
-    MDLabel:
-        text: "Designation: " + root.designation
-    MDLabel:
-        text: "Designation Level: " + root.designation_level
-
-
-
-Screen:
-    canvas.before:
-        Color:
-            rgba: 0/255, 51/255, 102/255, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
-	BoxLayout:
+                    radius: [dp(50)]
+                    
+        MDLabel:
+            id: name
+            text: "Deepak Chand"
+            size_hint_y: None
+            height: dp(40)
+            halign: 'center'
+            valign: 'middle'
+            
+    BoxLayout:
+        size_hint_x: .5
+        spacing: dp(8)
+        padding: dp(8)
         orientation: 'vertical'
-        size_hint: None, None
-        size: (dp(1253), dp(900))
-        pos_hint: {"center_x": .5, "center_y": .5}
         canvas.before:
             Color:
-                rgba: 173/255, 216/255, 230/255, 1
+                rgba: 1, 1, 1, 1
             RoundedRectangle:
                 pos: self.pos
                 size: self.size
-				radius: [dp(20)]
-		MDCard:
-			size_hint: None, None
-        	size: (dp(1253), dp(100))
-			MDLabel:
-				text: "Profile"
-				font_size: 40
-				halign: 'center'
+                radius: [dp(20)]
+                
+        MDLabel:
+            id: designation
+            text: "Designation: Developer"
+            halign: "center"
+        MDLabel:
+            id: joined
+            text: "Joined: Aug 2024"
+            halign: "center"
+        MDLabel:
+            id: email
+            text: "Email: ootalaldeepak128@gmail.com"
+            halign: "center"
+        MDLabel:
+            id: phone
+            text: "Phone: 9131043168"
+            halign: "center"
+            
+    BoxLayout:
+        spacing: dp(8)
+        padding: dp(8)
+        size_hint_x: .3
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [dp(20)]
+                
+        MDLabel:
+            id: last_login
+            text: "Last Login: 23-23-23"
+            halign: "center"
+        MDLabel:
+            id: duration
+            text: "Working hours: Aug 2024"
+            halign: "center"
+<EmployeeInfo>:
+	GridLayout:
+		cols: 2
+		spacing: dp(10)
+		size_hint_x:1
+		padding: dp(10)
+		size_hint_y: None
+		halign:'center'
+		height: self.minimum_height
+		MDLabel:
+			text: "Employee Id:"
+			halign: "center"
+			size_hint_y: None
+			height: dp(40)
+		MDLabel:
+			id:employee_id
+			text: root.employeeid
+			halign: "center"
+			size_hint_y: None
+			height: dp(40)
+		MDLabel:
+			text: "Joined:"
+			halign: "center"
+			size_hint_y: None
+			height: dp(40)
+		MDLabel:
+			id :joined
+			text: root.joined
+			halign: "center"
+			size_hint_y: None
+			height: dp(40)
+		MDLabel:
+			text: "Designation"
+			halign: "center"
+			size_hint_y: None
+			height: dp(40)
+		MDLabel:
+			id:designation
+			text: root.designation
+			halign: "center"
+			size_hint_y: None
+			height: dp(40)
+		MDLabel:
+			
+			text: "Designation Level"
+			halign: "center"
+			size_hint_y: None
+			height: dp(40)
+		MDLabel:
+			id:designation_level
+			text: root.designationlevel
+			halign: "center"
+			size_hint_y: None
+			height: dp(40)
+		MDLabel:
+			text: "Shift"
+			halign: "center"
+			size_hint_y: None
+			height: dp(40)
+		MDLabel:
+			id:shift
+			text: root.shift
+			halign: "center"
+			size_hint_y: None
+			height: dp(40)
+	BoxLayout:
+<PersonalInfo>:
+	GridLayout:
+		cols: 2
+		spacing: dp(10)
+		size_hint_x:1
+		padding: dp(10)
+		size_hint_y: None
+		halign:'center'
+		height: self.minimum_height
+		MDLabel:
+			text: "First Name"
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			id:firstname
+			text: root.firstname
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			text: "Last Name"
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			id:lastname
+			text: root.lastname
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			text: "Father Name"
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			id:fathername
+			text: root.fathername
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			text: "Mother Name"
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			id:mothername
+			text: root.mothername
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			text: "Address"
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			id:address
+			text: root.address
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			text: "Phone"
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			id:phone
+			text: root.phone
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			text: "Email"
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			id:email
+			text: root.email
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			text: "Description"
+			halign: "center"
+			size_hint_y: None
+			height: dp(30)
+		MDLabel:
+			id:description
+			text: root.description
+			halign: "center"
+			size_hint_y: None
+			height: dp(70)
+	BoxLayout:
+
+
+			
+	
+<SuccessScreen>:
+    name: "success"
+	BoxLayout:
+		spacing: dp(8)
+
+		canvas.before:
+			Color:
+				rgba: rgba('#02a995')
+			Rectangle:
+				pos: self.pos
+				size: self.size
+
 		BoxLayout:
-			orientation: 'horizontal'
-			padding: dp(20)
-			size_hint: None, None
-			size: (dp(1253), dp(754))
-			pos_hint: {"center_x": .5, "center_y": .5}
+			size_hint_x: .2
+			orientation: 'vertical'
+			padding: dp(10)
 
 			canvas.before:
 				Color:
-					rgba: 173/255, 216/255, 230/255, 1
-				RoundedRectangle:
+					rgba: rgba('#02a995')
+				Rectangle:
 					pos: self.pos
 					size: self.size
-					radius: [dp(20)] 
+
 			BoxLayout:
 				orientation: 'vertical'
-				size_hint: None, None
-				size: (dp(911), dp(605))
+				size_hint_y: .26
 				padding: dp(10)
+
 				canvas.before:
 					Color:
-						rgba: 173/255, 216/255, 230/255, 1
+						rgba: rgba('#02a995')
 					Rectangle:
 						pos: self.pos
 						size: self.size
-				ProfileCard:
-					id: profile_card
-					name: "John Doe"
-					designation: "Software Engineer"
-					address: "1234 Elm Street"
-					phone_number: "+1 234 567 890"
-					email: "john.doe@example.com"
-				
-				BoxLayout:
-					orientation: 'horizontal'
-					size_hint: None, None
-					size: (dp(883), dp(110))
-					padding: dp(15)
-					spacing: dp(10)
-
-					canvas.before:
-						Color:
-							rgba:173/255, 216/255, 230/255, 1
-						RoundedRectangle:
-							pos: self.pos
-							size: self.size
-							radius: [dp(20)]
-					MDCard:
-						size:(dp(194),dp(75))
-						padding:dp(5)
-						orientation:'horizontal'
-						size_hint:None,None
-						on_release: app.on_card_click()	
-						pos_hint :{"center_x":.5,"center_y":.5}
-						MDLabel:
-							text:"Active Goals"
-							valign:'middle'
-							halign:'center'
-							padding:dp(10)
-
-						MDLabel:
-							text:"3"
-							valign:'middle'
-							font_style: "H6"
-							halign:'center'
-							padding:dp(10)
-						
-					MDCard:
-						size:(dp(194),dp(75))
-						padding:dp(5)
-						orientation:'horizontal'
-						size_hint:None,None
-						pos_hint :{"center_x":.5,"center_y":.5}
-						MDLabel:
-							text:"Progress"
-							valign:'middle'
-							halign:'center'
-							padding:dp(10)
-
-						MDLabel:
-							text:"40%"
-							valign:'middle'
-							font_style: "H6"
-							halign:'center'
-							padding:dp(10)
-					MDCard:
-						size:(dp(194),dp(75))
-						padding:dp(5)
-						orientation:'horizontal'
-						size_hint:None,None
-						pos_hint :{"center_x":.5,"center_y":.5}
-						MDLabel:
-							text:"Completed Task"
-							valign:'middle'
-							halign:'center'
-							
-
-						MDLabel:
-							text:"6"
-							valign:'middle'
-							font_style: "H6"
-							halign:'center'
-							
-					MDCard:
-						size:(dp(194),dp(75))
-						padding:dp(5)
-						orientation:'horizontal'
-						size_hint:None,None
-						pos_hint :{"center_x":.5,"center_y":.5}
-						MDLabel:
-							text:"Due Task"
-							valign:'middle'
-							halign:'center'
-							padding:dp(10)
-
-						MDLabel:
-							text:"2"
-							valign:'middle'
-							font_style: "H6"
-							halign:'center'
-							padding:dp(10)
-				BoxLayout:
-					orientation: 'vertical'
-					size_hint: None, None
-					size: (dp(883), dp(390))
-					padding: dp(15)
-					spacing: dp(10)
-					canvas.before:
-						Color:
-							rgba: 173/255, 216/255, 230/255, 1
-						Rectangle:
-							pos: self.pos
-							size: self.size
-					MDCard:
-						size_hint: None, None
-						size: dp(869), dp(380)
-						id: table_card
-						orientation: 'vertical'
-						BoxLayout:
-							size_hint: None, None
-							size:(dp(869),dp(50))
-							MDLabel:
-								id:widget
-								text:""
-								font_style:"H6"
-								font_size:20
-								halign:'center'
-						MDCard:
-							id: scroll_container
-							size_hint: (1, 1)
-							
-									
+				Image:
+					id: logo
+					source: 'logo.png'
 			BoxLayout:
-				size:(dp(301),dp(705))
 				orientation: 'vertical'
-				size_hint: None, None
-						
-				padding: dp(15)
-				spacing: dp(10)
+				size_hint_y: .4
+				padding: dp(10)
+				spacing: dp(8)
+
+				MDCard:
+					size_hint_y: .25
+					elevation: 1
+					on_release: app.display_personalinfo()
+					MDLabel:
+						id: personal_info
+						font_style: "Button"
+						text: "Personal Info"
+						halign: "center"
+
+				MDCard:
+					size_hint_y: .25
+					elevation: 1
+					on_release: app.display_employeeinfo()
+					MDLabel:
+						id: employee_info
+						font_style: "Button"
+						text: "Employee Info"
+						halign: "center"
+
+				MDCard:
+					size_hint_y: .25
+					elevation: 1
+					on_release: app.display_table()
+					MDLabel:
+						id: attendence_info
+						font_style: "Button"
+						text: "Attendance Info"
+						halign: "center"
+
+				MDCard:
+					size_hint_y: .25
+					elevation: 1
+					MDLabel:
+						id: employee_info
+						font_style: "Button"
+						text: "Analytics Info"
+						halign: "center"
+
+			BoxLayout:
+				orientation: 'vertical'
+				size_hint_y: .4
+				MDFillRoundFlatIconButton:
+					style: "filled"
+					md_bg_color: rgba('#099080')
+					text: "Logout"
+					font_size: 18
+					pos_hint: {"center_x": 0.5}
+					on_press: app.logout()
+					halign: "center"
+
+				Widget:
+					size_hint_y: None
+					height: dp(20)    
+
+		BoxLayout:
+			id: tab
+			size_hint_x: .8
+			padding: dp(10)
+			orientation: 'vertical'
+
+			canvas.before:
+				Color:
+					rgba: rgba('#02a995')
+				Rectangle:
+					pos: self.pos
+					size: self.size
+
+			ProfileCard:
+				id: profile_card
+				name: "John Doe"
+				designation: "Software Engineer"
+				address: "1234 Elm Street"
+				phone_number: "+1 234 567 890"
+				email: "john.doe@example.com"
+
+			BoxLayout:
+				id: downcard
+				size_hint_y: .8
+
 				canvas.before:
 					Color:
-						rgba:173/255, 216/255, 230/255, 1
+						rgba: rgba('#02a995')
 					Rectangle:
 						pos: self.pos
 						size: self.size
-						
+
 				MDCard:
-					size:(dp(267),dp(291))
+					size_hint_y: .97
 					orientation: 'vertical'
-
-					size_hint: None, None	
-					padding: dp(15)
-					spacing: dp(10)
-					MDLabel:
-						text:"Score"
-						pos_hint:{"center_x":0.5,"center_y":0.5}
-						padding:dp(10)
-						font_style: "H6"
-						halign:'center'
+					elevation: 2
 					BoxLayout:
-						padding:dp(10)
-						size_hint:None,None
-						halign:'center'
-						pos_hint:{"center_x":0.5,"center_y":0.5}
-						size:(dp(150),dp(220))
-						orientation:"horizontal"
-						MDProgressBar:
-							value: 70
-							orientation: "vertical"
-							color: app.theme_cls.primary_color
-							size_hint: (None, None)
-							width: dp(25)  
-							padding:dp(10)
-							height: dp(200)
+						size_hint:(1,.1)
+						
 						MDLabel:
-							text:"70%"
-							pos_hint:{"center_x":0.5,"center_y":0.5}
-							padding:dp(10)
+							id: widget
+							text: "DOWN"
 							font_style: "H6"
+							font_size: 20
+							halign: 'center'
+					MDCard:
+						id: scroll_container
+						orientation:'vertical'
+						size_hint: (1, 1)
+						
 							
-					MDLabel:
-						text:"Fantastic Job"
-						padding:dp(10)
-						pos_hint:{"center_x":0.5,"center_y":0.5}
-						font_style: "H6"
-						halign:'center'
-				MDCard:
-					size:(dp(267),dp(291))
-					orientation:'horizontal'
-					padding:dp(5)
-					MDLabel:
-						text:"Performance"
-						padding:dp(10)
-						valign:'center'
-					MDLabel:
-						text:"Based on work +15"
-						padding:dp(10)
-				MDCard:
-					size:(dp(267),dp(291))
-					padding:dp(5)
-					MDLabel:
-						text:"Success"
-						padding:dp(10)
-						valign:'center'
-					MDLabel:
-						text:"Projects +15"
-						padding:dp(10)
-				MDCard:
-					size:(dp(267),dp(291))
-					padding:dp(5)
-					MDLabel:
-						text:"Success"
-						padding:dp(10)
-						valign:'center'
-					MDLabel:
-						text:"Projects +15"
-						padding:dp(10)
-					
-		MDFillRoundFlatIconButton:
-			style:"filled"
-			text: "Logout"
-			font_size: 18
-			pos_hint: {"center_x": 0.5}
-			#on_press: app.logout()
-			halign: "center"
-		Widget:
-			size_hint_y: None
-			height: dp(20)	
 
-				
-					
 
-	
+							
+
+						
+							
+					

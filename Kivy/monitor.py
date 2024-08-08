@@ -17,6 +17,10 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.clock import Clock
 from kivy.uix.scrollview import ScrollView
 from datetime import datetime
+from kivy.core.window import Window
+
+Window.size = (1250, 768)  
+
 
 
 class ProfileCard(MDCard):
@@ -25,12 +29,49 @@ class ProfileCard(MDCard):
     phone_number = StringProperty("")
     address = StringProperty("")
 
+
+class EmployeeInfo(MDCard):
+    employeeid = StringProperty("N/A")
+    joined = StringProperty("N/A")
+    designation = StringProperty("N/A")
+    designationlevel = StringProperty("N/A")
+    shift = StringProperty("N/A")
+
+    def __init__(self, employeeid="N/A", joined="N/A", designation="N/A", designationlevel="N/A", shift="N/A", **kwargs):
+        super().__init__(**kwargs)
+        self.employeeid = employeeid
+        self.joined = joined 
+        self.designation = designation 
+        self.designationlevel = designationlevel
+        self.shift = shift 
+
+class PersonalInfo(MDCard):
+    firstname = StringProperty("N/A")
+    lastname = StringProperty("N/A")
+    fathername = StringProperty("N/A")
+    mothername = StringProperty("N/A")
+    address = StringProperty("N/A")
+    phone = StringProperty("N/A")
+    email = StringProperty("N/A")
+    description = StringProperty("N/A")
+
+    def __init__(self, firstname="N/A", lastname="N/A", mothername="N/A", fathername="N/A", address="N/A", email="N/A", phone="N/A", description="N/A", **kwargs):
+        super().__init__(**kwargs)
+        self.firstname = firstname 
+        self.lastname = lastname
+        self.mothername = mothername 
+        self.fathername = fathername 
+        self.address = address 
+        self.phone = phone 
+        self.email = email 
+        self.description = description
+
 class MainApp(MDApp):
     def build(self):
         self.theme_cls.theme_style = "Light"
-        self.theme_cls.primary_palette = "Blue"
+        self.theme_cls.primary_palette = "Teal"
         Builder.load_file('login.kv')
-        Builder.load_file('success.kv')
+        Builder.load_file('sample.kv')
         self.screen_manager = ScreenManager()
         
         self.screen_manager.add_widget(LoginScreen(name='login'))
@@ -103,8 +144,8 @@ class MainApp(MDApp):
             ]
 
             table = MDDataTable(
-                size_hint=(1, None),
-                height=dp(330),
+                size_hint_x = 0.6,
+                size_hint_y = 1,
                 rows_num=len(time_tracking),
                 column_data=[
                     ("Login Count", dp(40)),
@@ -112,171 +153,85 @@ class MainApp(MDApp):
                     ("Logout Time", dp(40)),
                     ("Duration", dp(40))
                 ],
-                row_data=formatted_data
+                row_data=formatted_data,
+                pos_hint={"center_x":.5,"center_y":.5},
+				
+                
             )
             self.attendance_table = table
             scroll_container.add_widget(table)
         else:
             success_screen.ids.scroll_container.clear_widgets()
             success_screen.ids.scroll_container.add_widget(self.attendance_table)
+    def display_personalinfo(self):
+        success_screen = self.screen_manager.get_screen('success')
+        success_screen.ids.widget.text = "Personal Information"
+        
+
+        if not hasattr(self, 'personal_info_card'):
+            scroll_container = success_screen.ids.scroll_container
+            scroll_container.clear_widgets()
+            
+    
+            login_screen = self.screen_manager.get_screen('login')
+            employee_data = login_screen.get_employee_data()
+
+            
+            personal_info_card = PersonalInfo(
+                firstname=employee_data.get('firstName', 'N/A'),
+                lastname=employee_data.get('lastName', 'N/A'),
+                mothername=employee_data.get('motherName', 'N/A'),
+                fathername=employee_data.get('fatherName', 'N/A'),
+                address=employee_data.get('address', 'N/A'),
+                phone=str(employee_data.get('phoneNo', 'N/A')),
+                email=employee_data.get('email', 'N/A'),
+                description=employee_data.get('description', 'N/A'),
+                pos_hint={"center_x":.5,"center_y":.5},
+				orientation='vertical'
+            )
+
+            
+            scroll_container.add_widget(personal_info_card)
+
+           
+            self.personal_info_card = personal_info_card
+        else:
+            success_screen.ids.scroll_container.clear_widgets()
+            success_screen.ids.scroll_container.add_widget(self.personal_info_card)
     def display_employeeinfo(self):
         success_screen = self.screen_manager.get_screen('success')
         success_screen.ids.widget.text = "Employee Info"
+    
         if not hasattr(self, 'employee_info_card'):
             scroll_container = success_screen.ids.scroll_container
             scroll_container.clear_widgets()
             
             login_screen = self.screen_manager.get_screen('login')
             employee_data = login_screen.get_employee_data()
+
             
-            card = MDCard(
-                size_hint=(None, None),
-                size=(dp(869), dp(330)),
-                orientation='vertical',
-                padding=dp(5),
-                spacing=dp(5),
-                pos_hint={'center_x': 0.3},
-                #elevation=10,  
-                #md_bg_color=(0.9, 0.9, 0.9, 1) 
+            employee_info_card = EmployeeInfo(
+                employeeid=employee_data.get('employeeId', 'N/A'),
+                joined=employee_data.get('createdAt', 'N/A'),
+                designation=employee_data.get('designation', 'N/A'),
+                designationlevel=employee_data.get('designationLevel', 'N/A'),
+                shift=employee_data.get('Shift', 'N/A'),
+                pos_hint={"center_x":.5,"center_y":.5},
+				orientation='vertical'
             )
 
-            grid_layout = GridLayout(
-                cols=2,
-                size_hint_y=None,
-                height=dp(300),
-                padding=dp(5),
-                spacing=dp(5)
-            )
-
-            keys_to_display = ['employeeId', 'createdAt', 'designation', 'designationLevel', 'Shift']
-            for key in keys_to_display:
-                value = employee_data.get(key, 'N/A')
-                if key == 'createdAt' and 'T' in value:
-                    try:
-                        value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%d')
-                    except ValueError as e:
-                        print(f"Error parsing date: {e}")
-                        value = "Unknown"
-
-                label_key = MDLabel(
-                    text=key.replace('_', ' ').title() + ':',
-                    size_hint_y=None,
-                    height=dp(40),
-                    halign='left',
-                    valign='middle',
-                    font_style='Subtitle1',  
-                    color=(0, 0, 0, 1)  
-                )
-                label_value = MDLabel(
-                    text=value,
-                    size_hint_y=None,
-                    height=dp(40),
-                    halign='left',
-                    valign='middle',
-                    font_style='Subtitle1',  
-                    color=(0.3, 0.3, 0.3, 1)  
-                )
-
-                grid_layout.add_widget(label_key)
-                grid_layout.add_widget(label_value)
-
-            card.add_widget(grid_layout)
-
-            empty_widget = Widget(
-                size_hint_y=None,
-                height=dp(20)
-            )
-            card.add_widget(empty_widget)
-
-            self.employee_info_card = card
-            scroll_container.add_widget(card)
+           
+            scroll_container.add_widget(employee_info_card)
+            self.employee_info_card = employee_info_card
         else:
             success_screen.ids.scroll_container.clear_widgets()
             success_screen.ids.scroll_container.add_widget(self.employee_info_card)
 
-
-    def display_personalinfo(self):
-        success_screen = self.screen_manager.get_screen('success')
-        success_screen.ids.widget.text = "Personal Information"
-        if not hasattr(self, 'personal_info_card'):
-            scroll_container = success_screen.ids.scroll_container
-            scroll_container.clear_widgets()
-            login_screen = self.screen_manager.get_screen('login')
-            employee_data = login_screen.get_employee_data()
-
-            card = MDCard(
-                size_hint=(None, None),
-                size=(dp(869), dp(330)),
-                orientation='vertical',
-                padding=dp(5),
-                spacing=dp(5),
-                pos_hint={'center_x': 0.5},
-               # elevation=10,  
-                #md_bg_color=(0.9, 0.9, 0.9, 1) 
-            )
-            scroll_view = ScrollView(
-                size_hint=(1, 1),
-                size=(dp(869), dp(330)),  
-                do_scroll_x=False,
-                pos_hint={'center_x': 0.5},
-                do_scroll_y=True
-            )
-            grid_layout = GridLayout(
-                cols=2,
-                size_hint_y=None,
-                height=dp(300),
-                padding=dp(5),
-                spacing=dp(5)
-            )
-
-            keys_to_display = ['firstName', 'lastName', 'motherName', 'fatherName', 'address', 'phoneNo', 'email', 'description']
-            for key in keys_to_display:
-                value = employee_data.get(key, 'N/A')
-                if key == 'createdAt' and 'T' in value:
-                    try:
-                        value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%fZ').strftime('%Y-%m-%d')
-                    except ValueError as e:
-                        print(f"Error parsing date: {e}")
-                        value = "Unknown"
-                
-                label_key = MDLabel(
-                    text=key.replace('_', ' ').title() + ':',
-                    size_hint_y=None,
-                    height=dp(40),
-                    halign='left',
-                    valign='middle',
-                    font_style='Subtitle1',
-                    color=(0, 0, 0, 1)  
-                )
-                
-                label_value = MDLabel(
-                    text=str(value),
-                    size_hint_y=None,
-                    height=dp(40),
-                    halign='left',
-                    valign='middle',
-                    font_style='Subtitle1',  
-                    color=(0.3, 0.3, 0.3, 1)  
-                )
-
-                grid_layout.add_widget(label_key)
-                grid_layout.add_widget(label_value)
-            card.add_widget(scroll_view)
-            empty_widget = Widget(
-                size_hint_y=None,
-                height=dp(50)
-            )
-            grid_layout.add_widget(empty_widget)
-            scroll_view.add_widget(grid_layout)
-            self.personal_info_card = card
-            scroll_container.add_widget(card)
-        else:
-            success_screen.ids.scroll_container.clear_widgets()
-            success_screen.ids.scroll_container.add_widget(self.personal_info_card)
 
 
 
 if __name__ == '__main__':
     MainApp().run()
 
-"""            """
+""" grid_layout.add_widget(empty_widget)
+            scroll_view.add_widget(grid_layout)"""
