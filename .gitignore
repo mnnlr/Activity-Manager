@@ -5,3 +5,6 @@ Kivy/build/*
 Tkinter/__pycache__/*
 Kivy/image.png
 Kivy/sam.py 
+Kivy/dist/*
+Kivy/build/*
+venv/*
