@@ -18,12 +18,10 @@ class SuccessScreen(Screen):
             self.user_activity_monitor = None
 
     def logout_due_to_inactivity(self):
-        print("User has been logged out due to inactivity")
         cookie = self.screen_manager.get_screen('login').cookies
         #access_token = self.user_data.get('access_token')
 
         def on_success():
-            print("Logout Successful")
             self.screen_manager.current = 'login'
             login_screen = self.screen_manager.get_screen('login')
             login_screen.clear_fields()

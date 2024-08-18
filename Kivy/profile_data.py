@@ -15,7 +15,6 @@ class Profile:
             print(response.json())
             return response.json()
         except requests.exceptions.HTTPError as e:
-            print(f"HTTPError: {e}")
             return None
 
     def _get_employee_data(self, employee_id):
@@ -27,14 +26,12 @@ class Profile:
             response.raise_for_status()
             return response.json()
         except requests.exceptions.HTTPError as e:
-            print(f"HTTPError: {e}")
             return None
 
     def getProfileData(self):
         attendance_data = self._get_attendance_data()
         
         if not attendance_data:
-            print("Failed to fetch attendance data. Redirecting to login page.")
             return None
         data = attendance_data.get('Data')
         employee_id = data.get('employeeDocId')
@@ -43,7 +40,6 @@ class Profile:
             employee_data = self._get_employee_data(employee_id)
             
             if not employee_data:
-                print("Failed to fetch employee data. Redirecting to login page.")
                 return None
             
             self.profile_data['attendance_data'] = attendance_data

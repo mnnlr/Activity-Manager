@@ -6,8 +6,9 @@ from kivymd.uix.button import MDFlatButton
 from profile_data import Profile
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 from extract_cookie import convert_cookies_to_dict
-import datetime
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+
 
 class LoginScreen(Screen):
     dialog = None
@@ -15,7 +16,8 @@ class LoginScreen(Screen):
     Dashboard_data = None
 
     def userlogin(self, username, password, display_table):
-        print(f"Attempting to log in with username: {username}, password: {password}")
+        
+        
         self.user_data = {}
         try:
             response = requests.post(
@@ -26,7 +28,7 @@ class LoginScreen(Screen):
             response.raise_for_status()
             response_data = response.json()
             self.cookies = convert_cookies_to_dict(response.cookies)
-            print(self.cookies)
+            
 
             if response.status_code == 200 and response_data.get('success'):
                 found_user = response_data.get('foundUser', {})
@@ -38,21 +40,20 @@ class LoginScreen(Screen):
                 Clock.schedule_once(lambda dt: self.fetch_profile_data(success_screen, display_table))
                 
             else:
-             self.show_dialog('Login Failed', response_data.get('message', 'Login failed'))
+                self.show_dialog('Login Failed', response_data.get('message', 'Login failed'))
+
         except requests.RequestException as e:
-            print(f"Request failed: {e}")
+           
             self.show_dialog('Error', 'An error occurred while logging in. Please try again.')
+
+
 
     def fetch_profile_data(self, success_screen, display_table):
         profile = Profile(self.user_data)
         self.Dashboard_data = profile.getProfileData()
         if self.Dashboard_data:
             attendance_data = self.get_attendance_data()
-            employee_data = self.get_employee_data()
-            print("Dashboard Data:", self.Dashboard_data)
-            print("Attendance Data:", attendance_data)
-            print("Employee Data:", employee_data)
-            
+            employee_data = self.get_employee_data()   
             self.manager.current = 'success'
             self.populate_profile_card(employee_data, attendance_data)
             display_table()
@@ -104,6 +105,6 @@ class LoginScreen(Screen):
         profile_card.ids.phone.text = f"{employee_data.get('phoneNo', '')}"
         profile_card.ids.joined.text = f"Joined: {employee_data.get('createdAt', '')[:10]}"
         profile_card.ids.designation.text = f"{employee_data.get('designation', '')}"
-        profile_card.ids.avatar.source = employee_data.get('avatar', {}).get('url', '')
+        profile_card.ids.avatar.source = employee_data.get('avatar', {}).get('url', 'image.png')
         profile_card.ids.last_login.text = f"Last Login: {str(last_login_time)}"
         profile_card.ids.duration.text = f"Working Hours: {data.get('totalWorkingHours', '')}"

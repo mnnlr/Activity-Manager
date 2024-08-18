@@ -5,23 +5,29 @@ from kivy.uix.screenmanager import ScreenManager
 from login_screen import LoginScreen
 from kivymd.uix.button import MDFlatButton
 from kivy.properties import StringProperty
+from kivy.uix.anchorlayout import AnchorLayout
 from success_screen import SuccessScreen
-from kivymd.uix.label import MDLabel
 from logout_action import perform_logout  
-from kivy.uix.widget import Widget
 from kivymd.uix.dialog import MDDialog
 from kivy.metrics import dp
-from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.datatables import MDDataTable
-from kivy.uix.gridlayout import GridLayout
-from kivy.clock import Clock
-from kivy.uix.scrollview import ScrollView
-from datetime import datetime
+import sys
 from kivy.core.window import Window
+from kivy.resources import resource_add_path, resource_find
+from kivy.config import Config
 
-Window.size = (1250, 768)  
 
 
+
+Config.set('kivy','window_icon','C:\\Users\\ootal\\OneDrive\\Desktop\\Activity-Manager\\Kivy\\logo.png')
+Config.set('graphics', 'multisamples', '0')  
+Config.set('graphics', 'gl_backend', 'angle_sdl2')  
+
+if getattr(sys, 'frozen', False):  
+    resource_add_path(sys._MEIPASS)
+
+
+Window.size = (1080, 768)  
 
 class ProfileCard(MDCard):
     name = StringProperty("")
@@ -30,7 +36,7 @@ class ProfileCard(MDCard):
     address = StringProperty("")
 
 
-class EmployeeInfo(MDCard):
+class EmployeeInfo(AnchorLayout):
     employeeid = StringProperty("N/A")
     joined = StringProperty("N/A")
     designation = StringProperty("N/A")
@@ -45,7 +51,7 @@ class EmployeeInfo(MDCard):
         self.designationlevel = designationlevel
         self.shift = shift 
 
-class PersonalInfo(MDCard):
+class PersonalInfo(AnchorLayout):
     firstname = StringProperty("N/A")
     lastname = StringProperty("N/A")
     fathername = StringProperty("N/A")
@@ -70,8 +76,9 @@ class MainApp(MDApp):
     def build(self):
         self.theme_cls.theme_style = "Light"
         self.theme_cls.primary_palette = "Teal"
-        Builder.load_file('login.kv')
-        Builder.load_file('sample.kv')
+        self.icon = 'logo.png'
+        Builder.load_file(resource_find('login.kv'))
+        Builder.load_file(resource_find('sample.kv'))
         self.screen_manager = ScreenManager()
         
         self.screen_manager.add_widget(LoginScreen(name='login'))
@@ -79,22 +86,38 @@ class MainApp(MDApp):
         return self.screen_manager
 
     def login(self):
-        print("Login button pressed")
+        
         login_screen = self.screen_manager.get_screen('login')
         username = login_screen.ids.user.text
         password = login_screen.ids.password.text
-        print(f"Username: {username}, Password: {password}")
-
+        
         login_screen.userlogin(username, password,self.display_table)
 
     def logout(self):
-        print("Logout button pressed")
+        
         access_token = self.screen_manager.get_screen('success').user_data.get('access_token')
         cookie = self.screen_manager.get_screen('login').cookies
 
 
         def on_success():
             self.show_message("Logout", "Logout Successful")
+            success_screen = self.screen_manager.get_screen('success')
+
+            if hasattr(self, 'attendance_table') or hasattr(self, 'personal_info_card') or hasattr(self, 'employee_info_card'):
+                success_screen.ids.scroll_container.clear_widgets()
+
+                if hasattr(self, 'attendance_table'):
+                    del self.attendance_table
+
+                if hasattr(self, 'personal_info_card'):
+                    del self.personal_info_card
+
+                if hasattr(self, 'employee_info_card'):
+                    del self.employee_info_card
+
+            self.screen_manager.get_screen('success').user_data.clear()
+            self.screen_manager.get_screen('login').user_data.clear()
+
             self.on_logout()  
 
         def on_failure(message):
@@ -124,13 +147,13 @@ class MainApp(MDApp):
         success_screen = self.screen_manager.get_screen('success')
         success_screen.ids.widget.text = "Attendence"
         if not hasattr(self, 'attendance_table'):
+            print("table printing for the first time")
             scroll_container = success_screen.ids.scroll_container
             scroll_container.clear_widgets()
             login_screen = self.screen_manager.get_screen('login')
             attendance_data = login_screen.get_attendance_data()
 
             if not attendance_data or not attendance_data.get('success'):
-                print("No attendance data available.")
                 return
 
             data = attendance_data.get('Data', {})
@@ -142,25 +165,33 @@ class MainApp(MDApp):
                  , entry.get('duration', 'N/A'))
                 for index, entry in enumerate(time_tracking)
             ]
+            print(formatted_data)
+            layout = AnchorLayout(
+                size_hint = (1,1),
+                anchor_x = 'center',
+                anchor_y = 'top',
+
+            )
 
             table = MDDataTable(
-                size_hint_x = 0.6,
+                size_hint_x = 1,
                 size_hint_y = 1,
                 rows_num=len(time_tracking),
                 column_data=[
-                    ("Login Count", dp(40)),
-                    ("Login Time", dp(40)),
-                    ("Logout Time", dp(40)),
-                    ("Duration", dp(40))
+                    ("Login Count", dp(60)),
+                    ("Login Time", dp(60)),
+                    ("Logout Time",dp(60)),
+                    ("Duration", dp(60))
                 ],
                 row_data=formatted_data,
                 pos_hint={"center_x":.5,"center_y":.5},
-				
-                
             )
-            self.attendance_table = table
-            scroll_container.add_widget(table)
+            
+            layout.add_widget(table)
+            self.attendance_table = layout
+            scroll_container.add_widget(layout)
         else:
+            print("rendering already printed")
             success_screen.ids.scroll_container.clear_widgets()
             success_screen.ids.scroll_container.add_widget(self.attendance_table)
     def display_personalinfo(self):
@@ -187,7 +218,8 @@ class MainApp(MDApp):
                 email=employee_data.get('email', 'N/A'),
                 description=employee_data.get('description', 'N/A'),
                 pos_hint={"center_x":.5,"center_y":.5},
-				orientation='vertical'
+                anchor_x = 'center',
+                anchor_y = 'center',
             )
 
             
@@ -212,12 +244,13 @@ class MainApp(MDApp):
             
             employee_info_card = EmployeeInfo(
                 employeeid=employee_data.get('employeeId', 'N/A'),
-                joined=employee_data.get('createdAt', 'N/A'),
+                joined = employee_data.get('createdAt', 'N/A').split('T')[0],
                 designation=employee_data.get('designation', 'N/A'),
                 designationlevel=employee_data.get('designationLevel', 'N/A'),
                 shift=employee_data.get('Shift', 'N/A'),
                 pos_hint={"center_x":.5,"center_y":.5},
-				orientation='vertical'
+                anchor_x = 'center',
+                anchor_y = 'center',
             )
 
            
@@ -233,5 +266,3 @@ class MainApp(MDApp):
 if __name__ == '__main__':
     MainApp().run()
 
-""" grid_layout.add_widget(empty_widget)
-            scroll_view.add_widget(grid_layout)"""

@@ -9,6 +9,8 @@ a = Analysis(
     datas=[
         ('login.kv', '.'),
         ('sample.kv', '.'),
+        ('icon.png', '.'),  
+        ('logo.png', '.')
     ],
     hiddenimports=[
         'kivy',
@@ -63,4 +65,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon='C:\\Users\\ootal\\OneDrive\\Desktop\\Activity-Manager\\Kivy\\logo.ico', 
 )

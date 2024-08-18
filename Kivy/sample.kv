@@ -26,7 +26,7 @@
                 
         AsyncImage:
             id: avatar
-            source: '' 
+            source: 'image.png' 
             canvas.before:
                 Color:
                     rgba: 1, 1, 1, 1
@@ -106,6 +106,7 @@
 		MDLabel:
 			text: "Employee Id:"
 			halign: "center"
+			font_style:"H6"
 			size_hint_y: None
 			height: dp(40)
 		MDLabel:
@@ -117,6 +118,7 @@
 		MDLabel:
 			text: "Joined:"
 			halign: "center"
+			font_style:"H6"
 			size_hint_y: None
 			height: dp(40)
 		MDLabel:
@@ -128,6 +130,7 @@
 		MDLabel:
 			text: "Designation"
 			halign: "center"
+			font_style:"H6"
 			size_hint_y: None
 			height: dp(40)
 		MDLabel:
@@ -141,6 +144,7 @@
 			text: "Designation Level"
 			halign: "center"
 			size_hint_y: None
+			font_style:"H6"
 			height: dp(40)
 		MDLabel:
 			id:designation_level
@@ -151,6 +155,7 @@
 		MDLabel:
 			text: "Shift"
 			halign: "center"
+			font_style:"H6"
 			size_hint_y: None
 			height: dp(40)
 		MDLabel:
@@ -161,103 +166,146 @@
 			height: dp(40)
 	BoxLayout:
 <PersonalInfo>:
-	GridLayout:
-		cols: 2
-		spacing: dp(10)
-		size_hint_x:1
-		padding: dp(10)
-		size_hint_y: None
-		halign:'center'
-		height: self.minimum_height
-		MDLabel:
-			text: "First Name"
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			id:firstname
-			text: root.firstname
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			text: "Last Name"
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			id:lastname
-			text: root.lastname
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			text: "Father Name"
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			id:fathername
-			text: root.fathername
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			text: "Mother Name"
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			id:mothername
-			text: root.mothername
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			text: "Address"
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			id:address
-			text: root.address
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			text: "Phone"
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			id:phone
-			text: root.phone
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			text: "Email"
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			id:email
-			text: root.email
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			text: "Description"
-			halign: "center"
-			size_hint_y: None
-			height: dp(30)
-		MDLabel:
-			id:description
-			text: root.description
-			halign: "center"
-			size_hint_y: None
-			height: dp(70)
 	BoxLayout:
+		pos_hint:{"center_x":.5,"center_y":.5}
+		size_hint_y:None
+		height: self.minimum_height
+		size_hint_x:1
+		orientation:'vertical'
+		GridLayout:
+			cols: 4
+			spacing: dp(10)
+			size_hint_x: 1
+			padding: dp(10)
+			size_hint_y: None
+			halign: 'center'
+			height: self.minimum_height
+
+			# First Name
+			MDLabel:
+				text: "First Name:"
+				halign: "center"
+				font_style: "H6"
+				size_hint_y: None
+				height: dp(30)
+			MDLabel:
+				id: firstname
+				text: root.firstname
+				halign: "center"
+				size_hint_y: None
+				height: dp(30)
+
+			# Last Name
+			MDLabel:
+				text: "Last Name:"
+				halign: "center"
+				font_style: "H6"
+				size_hint_y: None
+				height: dp(30)
+			MDLabel:
+				id: lastname
+				text: root.lastname
+				halign: "center"
+				size_hint_y: None
+				height: dp(30)
+
+			# Father Name
+			MDLabel:
+				text: "Father Name:"
+				halign: "center"
+				font_style: "H6"
+				size_hint_y: None
+				height: dp(30)
+			MDLabel:
+				id: fathername
+				text: root.fathername
+				halign: "center"
+				size_hint_y: None
+				height: dp(30)
+
+			# Mother Name
+			MDLabel:
+				text: "Mother Name:"
+				halign: "center"
+				font_style: "H6"
+				size_hint_y: None
+				height: dp(30)
+			MDLabel:
+				id: mothername
+				text: root.mothername
+				halign: "center"
+				size_hint_y: None
+				height: dp(30)
+
+			# Address
+			MDLabel:
+				text: "Address:"
+				font_style: "H6"
+				halign: "center"
+				size_hint_y: None
+				height: dp(30)
+			MDLabel:
+				id: address
+				text: root.address
+				halign: "center"
+				size_hint_y: None
+				height: dp(30)
+
+			# Phone
+			MDLabel:
+				text: "Phone:"
+				halign: "center"
+				font_style: "H6"
+				size_hint_y: None
+				height: dp(30)
+			MDLabel:
+				id: phone
+				text: root.phone
+				halign: "center"
+				size_hint_y: None
+				height: dp(30)
+
+		BoxLayout:
+			orientation: 'vertical'
+			spacing: dp(10)
+			padding: dp(10)
+			size_hint_y: None
+			height: self.minimum_height
+			pos_hint:{"center_x":.5,"center_y":.5}
+			# Email
+			GridLayout:
+				cols: 2
+				spacing: dp(10)
+				size_hint_y: None
+				height: dp(30)
+				MDLabel:
+					text: "Email:"
+					font_style: "H6"
+					halign: "center"
+				MDLabel:
+					id: email
+					text: root.email
+					halign: "center"
+
+			# Description
+			GridLayout:
+				cols: 2
+				spacing: dp(10)
+				size_hint_y: None
+				height: dp(70)
+				MDLabel:
+					text: "Description:"
+					font_style: "H6"
+					halign: "center"
+				MDLabel:
+					id: description
+					text: root.description
+					halign: "left"
+		BoxLayout:
+
+	
+		
+
 
 
 			
@@ -299,7 +347,7 @@
 						size: self.size
 				Image:
 					id: logo
-					source: 'logo.png'
+					source: 'icon.png'
 			BoxLayout:
 				orientation: 'vertical'
 				size_hint_y: .4
@@ -364,9 +412,9 @@
 		BoxLayout:
 			id: tab
 			size_hint_x: .8
-			padding: dp(10)
+			spacing:dp(8)
+			padding:dp(8)
 			orientation: 'vertical'
-
 			canvas.before:
 				Color:
 					rgba: rgba('#02a995')
@@ -384,32 +432,39 @@
 
 			BoxLayout:
 				id: downcard
-				size_hint_y: .8
-
+				size_hint_y: .65
+				spacing:dp(8)
 				canvas.before:
 					Color:
 						rgba: rgba('#02a995')
 					Rectangle:
 						pos: self.pos
 						size: self.size
-
-				MDCard:
-					size_hint_y: .97
+				BoxLayout:
+					size_hint_y: 1
 					orientation: 'vertical'
+					spacing:dp(8)
 					elevation: 2
-					BoxLayout:
-						size_hint:(1,.1)
-						
+					MDCard:
+						size_hint_y: None
+						height: widget.texture_size[1]   
+						padding: [0, dp(10), 0, 0]
 						MDLabel:
 							id: widget
 							text: "DOWN"
 							font_style: "H6"
-							font_size: 20
+							font_size: 40
 							halign: 'center'
+							valign:'middle'
+							size_hint_y: None
+							height: self.texture_size[1]
 					MDCard:
 						id: scroll_container
 						orientation:'vertical'
+						elevation:1
 						size_hint: (1, 1)
+			BoxLayout:
+				size_hint_y:.15
 						
 							
 
