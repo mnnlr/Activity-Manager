@@ -4,7 +4,7 @@ from kivy_deps import sdl2, glew
 
 a = Analysis(
     ['monitor.py'],
-    pathex=[r'C:\Users\ootal\OneDrive\Desktop\Activity-Manager\Kivy'],
+    pathex=[r'C:\Users\Dhruv PC\Desktop\Activity-Manager\Kivy'],
     binaries=[],
     datas=[
         ('login.kv', '.'),
